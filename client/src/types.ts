@@ -1,5 +1,5 @@
 export type Maybe<T> = T | null | undefined;
-export type Mode = 'all' | 'any';
+export type Mode = "all" | "any";
 export type FeedData = {
   title: string;
   link: string;

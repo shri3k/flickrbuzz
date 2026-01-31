@@ -1,8 +1,8 @@
-import type { PhotoCard as PhotoCardType } from './types.ts';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Badge } from '@/components/ui/badge';
+import type { PhotoCard as PhotoCardType } from "./types.ts";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Badge } from "@/components/ui/badge";
 
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 type PhotoCardProps = {
   item: PhotoCardType;
@@ -30,11 +30,11 @@ function PhotoCard({ item, onClick, query }: PhotoCardProps) {
               <h3 className="font-semibold text-lg">{item.title}</h3>
             </a>
             <div className="flex gap-1 overflow-x-auto ">
-              {item.tags.split(' ').map((tag) => {
-                const tags = query.split(',').map((t) => t.trim());
+              {item.tags.split(" ").map((tag) => {
+                const tags = query.split(",").map((t) => t.trim());
                 return (
                   <Badge
-                    variant={tags.includes(tag) ? 'destructive' : 'outline'}
+                    variant={tags.includes(tag) ? "destructive" : "outline"}
                   >
                     {tag}
                   </Badge>

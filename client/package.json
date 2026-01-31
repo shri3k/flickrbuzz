@@ -8,10 +8,11 @@
     "preview": "vite preview",
     "test": "vitest run",
     "e2e": "pnpm exec playwright test",
-    "lint": "eslint",
+    "lint": "pnpm exec eslint",
     "format": "prettier",
     "check": "prettier --write . && eslint --fix",
-    "shadcn": "pnpm dlx shadcn@latest add"
+    "shadcn": "pnpm dlx shadcn@latest add",
+    "precommit": "pnpm exec prek"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -35,6 +36,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@j178/prek": "^0.3.1",
     "@playwright/test": "^1.58.1",
     "@tanstack/devtools-vite": "^0.3.11",
     "@tanstack/eslint-config": "^0.3.0",

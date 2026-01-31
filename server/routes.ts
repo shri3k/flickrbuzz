@@ -1,4 +1,4 @@
-import type { FastifyInstance as Fastify, FastifySchema } from 'fastify';
+import type { FastifyInstance as Fastify } from 'fastify';
 import { type Static } from '@sinclair/typebox';
 
 import flickr from './flickr.ts';
@@ -9,8 +9,8 @@ const withSchema = <T>(schema: T): { schema: T } => ({
   schema,
 });
 
-export default async function routes(fastify: Fastify, options: any) {
-  fastify.get('/', withSchema(PublicFeed), async (request, reply) => {
+export default async function routes(fastify: Fastify) {
+  fastify.get('/', withSchema(PublicFeed), async (_, reply) => {
     const data = await flickr.publicFeed();
     reply.send(data);
   });

@@ -1,5 +1,5 @@
 import {
-  FlickrError,
+  BadResponseError,
   FlickrSearchError,
   FlickPublicFeedError,
 } from './error.ts';
@@ -33,7 +33,12 @@ export default {
       const data = await response.json();
       return data.items;
     } catch (error) {
-      throw new FlickrError('Failed to parse public feed response as JSON');
+      if (error instanceof Error) {
+        throw new BadResponseError(
+          'Failed to parse public feed response as JSON',
+          error
+        );
+      }
     }
   },
   search: async (query: string, mode: Mode | undefined) => {
@@ -46,7 +51,12 @@ export default {
       const data = await response.json();
       return data.items;
     } catch (error) {
-      throw new FlickrError('Failed to parse search response as JSON');
+      if (error instanceof Error) {
+        throw new BadResponseError(
+          'Failed to parse search response as JSON',
+          error
+        );
+      }
     }
   },
 };

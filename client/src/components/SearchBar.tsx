@@ -1,17 +1,17 @@
-import React from 'react';
-import { useNavigate, useSearch } from '@tanstack/react-router';
-import { Search } from 'lucide-react';
-import type { Maybe, Mode } from '@/types.ts';
+import React from "react";
+import { useNavigate, useSearch } from "@tanstack/react-router";
+import { Search } from "lucide-react";
+import type { Maybe, Mode } from "@/types.ts";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from '@/components/ui/input-group';
-import { Field, FieldDescription } from '@/components/ui/field';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Spinner } from '@/components/ui/spinner';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/input-group";
+import { Field, FieldDescription } from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 type Props = {
   onSearchSubmit: (query: string, mode?: Maybe<Mode>) => void;
@@ -20,19 +20,19 @@ type Props = {
 
 const hasMultipleQueries = (query: Maybe<string>): boolean => {
   if (!query) return false;
-  const queries = query.trim().split(',');
+  const queries = query.trim().split(",");
   return queries.length > 1;
 };
 
 export function SearchBar({ onSearchSubmit, isLoading }: Props) {
-  const navigate = useNavigate({ from: '/' });
-  const search = useSearch({ from: '/' });
+  const navigate = useNavigate({ from: "/" });
+  const search = useSearch({ from: "/" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formValues = new FormData(e.target as HTMLFormElement);
-    const query = formValues.get('search') as string;
-    const mode = formValues.get('mode') as Maybe<Mode>;
+    const query = formValues.get("search") as string;
+    const mode = formValues.get("mode") as Maybe<Mode>;
 
     onSearchSubmit(query, mode);
   };
@@ -50,9 +50,9 @@ export function SearchBar({ onSearchSubmit, isLoading }: Props) {
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = (e.target as HTMLInputElement).value;
     let newSearch = {};
-    if (!query && 'q' in search) {
+    if (!query && "q" in search) {
       newSearch = { ...search };
-      if ('q' in newSearch) {
+      if ("q" in newSearch) {
         delete newSearch.q;
       }
     } else {
@@ -88,13 +88,13 @@ export function SearchBar({ onSearchSubmit, isLoading }: Props) {
                 <RadioGroupItem
                   id="match-all"
                   value="all"
-                  defaultChecked={search.mode === 'all' || !search.mode}
+                  defaultChecked={search.mode === "all" || !search.mode}
                 />
                 <Label htmlFor="match-all">all</Label>
                 <RadioGroupItem
                   id="match-one"
                   value="any"
-                  defaultChecked={search.mode === 'any'}
+                  defaultChecked={search.mode === "any"}
                 />
                 <Label htmlFor="match-one">any</Label>
               </div>

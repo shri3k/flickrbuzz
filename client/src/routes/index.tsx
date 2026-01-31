@@ -1,13 +1,13 @@
-import { createFileRoute, ErrorComponent } from '@tanstack/react-router';
-import { useState } from 'react';
-import { z } from 'zod';
-import type { Maybe, Mode } from '@/types.ts';
+import { ErrorComponent, createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { z } from "zod";
+import type { Maybe, Mode } from "@/types.ts";
 
-import api from '@/libs/api.ts';
-import { Preview } from '@/components/Preview';
-import { SearchBar } from '@/components/SearchBar';
+import api from "@/libs/api.ts";
+import { Preview } from "@/components/Preview";
+import { SearchBar } from "@/components/SearchBar";
 
-async function getFeed(query: string, mode: string | undefined) {
+async function getFeed(query: string, mode: Maybe<Mode>) {
   if (query) {
     const items = await api.search(query, mode);
     return items;
@@ -18,16 +18,16 @@ async function getFeed(query: string, mode: string | undefined) {
 }
 const searchSchema = z.object({
   q: z.string().optional(),
-  mode: z.enum(['all', 'any']).optional(),
+  mode: z.enum(["all", "any"]).optional(),
 });
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: App,
   validateSearch: (search) => searchSchema.parse(search),
   loader: async ({ location }) => {
     const search = new URLSearchParams(location.search);
-    const query = search.get('q') || '';
-    const mode = search.get('mode') || undefined;
+    const query = search.get("q") || "";
+    const mode = search.get("mode") as Mode;
     return getFeed(query, mode);
   },
   shouldReload: false,
@@ -39,7 +39,7 @@ function App() {
   const data = Route.useLoaderData();
   const [feed, setFeed] = useState(data);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentQuery, setCurrentQuery] = useState<string>('');
+  const [currentQuery, setCurrentQuery] = useState<string>("");
 
   const handleOnSearchSubmit = async (query: string, mode: Maybe<Mode>) => {
     setIsLoading(true);

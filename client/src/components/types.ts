@@ -1,3 +1,3 @@
-import type { FeedData } from '@/types.ts';
+import type { FeedData } from "@/types.ts";
 
-export type PhotoCard = Omit<FeedData, 'description' | 'author_id'>;
+export type PhotoCard = Omit<FeedData, "description" | "author_id">;

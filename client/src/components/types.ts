@@ -1,13 +1,3 @@
-export type FeedData = {
-  title: string
-  link: string
-  media: {
-    m: string
-  }
-  date_taken: string
-  description: string
-  published: string
-  author: string
-  author_id: string
-  tags: string
-}
+import type { FeedData } from '@/types.ts';
+
+export type PhotoCard = Omit<FeedData, 'description' | 'author_id'>;

@@ -1,27 +1,43 @@
-import React from 'react'
-import type { FeedData } from './types.ts'
+import { useState } from 'react';
+import type { FeedData, Maybe } from '@/types.ts';
+import type { PhotoCard as PhotoCardType } from './types';
+import PhotoDialog from '@/components/PhotoDialog';
+import PhotoCard from '@/components/PhotoCard';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type Props = {
-  feed: [FeedData]
-}
+  feed: [FeedData];
+  query: string;
+};
 
-export function Preview({ feed }: Props) {
+export function Preview({ query, feed }: Props) {
+  const [currentItem, setCurrentItem] = useState<Maybe<PhotoCardType>>(null);
+
+  const handlePhotoEnlargeClick = (item: PhotoCardType) => {
+    setCurrentItem(item);
+  };
+  const handlePhotoEnlargeClose = () => {
+    setCurrentItem(null);
+  };
+
   return (
-    <div className="p-4">
-      {feed.map((item, index) => {
-        return (
-          <div key={index} className="mb-4 border-b pb-4">
-            <h2 className="text-xl font-bold mb-2">{item.title}</h2>
-            <img src={item.media.m} alt={item.title} className="mb-2" />
-            <p className="text-sm text-gray-600">
-              By {item.author} on{' '}
-              {new Date(item.date_taken).toLocaleDateString()}
-            </p>
-            <p className="mt-2">{item.description}</p>
-            <p className="text-sm text-gray-500">Tags: {item.tags}</p>
-          </div>
-        )
-      })}
-    </div>
-  )
+    <>
+      <div className="p-4">
+        <div className="columns-4 gap-2 mb-4">
+          {feed.map((item) => {
+            return (
+              <PhotoCard
+                item={item}
+                onClick={handlePhotoEnlargeClick}
+                query={query}
+              />
+            );
+          })}
+        </div>
+        {currentItem && (
+          <PhotoDialog item={currentItem} onClose={handlePhotoEnlargeClose} />
+        )}
+      </div>
+    </>
+  );
 }

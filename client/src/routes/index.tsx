@@ -52,8 +52,15 @@ function App() {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-4">
-      <SearchBar onSearchSubmit={handleOnSearchSubmit} isLoading={isLoading} />
-      <Preview feed={feed} query={currentQuery} />
+      <div className="w-full lg:w-xl m-auto">
+        <SearchBar
+          onSearchSubmit={handleOnSearchSubmit}
+          isLoading={isLoading}
+        />
+      </div>
+      <div>
+        <Preview feed={feed} query={currentQuery} />
+      </div>
     </div>
   );
 }

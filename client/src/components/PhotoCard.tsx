@@ -12,7 +12,7 @@ type PhotoCardProps = {
 
 function PhotoCard({ item, onClick, query }: PhotoCardProps) {
   return (
-    <Card className="overflow-hidden max-w-sm m-3">
+    <Card className="overflow-hidden max-w-md m-3">
       <CardContent className="p-0">
         <AspectRatio ratio={16 / 9}>
           <img

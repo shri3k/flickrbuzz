@@ -22,22 +22,20 @@ export function Preview({ query, feed }: Props) {
 
   return (
     <>
-      <div className="p-4">
-        <div className="columns-4 gap-2 mb-4">
-          {feed.map((item) => {
-            return (
-              <PhotoCard
-                item={item}
-                onClick={handlePhotoEnlargeClick}
-                query={query}
-              />
-            );
-          })}
-        </div>
-        {currentItem && (
-          <PhotoDialog item={currentItem} onClose={handlePhotoEnlargeClose} />
-        )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {feed.map((item) => {
+          return (
+            <PhotoCard
+              item={item}
+              onClick={handlePhotoEnlargeClick}
+              query={query}
+            />
+          );
+        })}
       </div>
+      {currentItem && (
+        <PhotoDialog item={currentItem} onClose={handlePhotoEnlargeClose} />
+      )}
     </>
   );
 }

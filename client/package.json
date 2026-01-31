@@ -8,6 +8,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "e2e": "pnpm exec playwright test",
+    "e2e:dev": "pnpm exec playwright test --last-failed --only-changed",
+    "play": "pnpm exec playwright",
     "lint": "pnpm exec eslint",
     "format": "prettier",
     "check": "prettier --write . && eslint --fix",

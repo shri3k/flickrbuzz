@@ -15,11 +15,12 @@ function PhotoDialog({ item, onClose }: PhotoDialog) {
   const largeImageUrl = item.media.m.replace("_m.", "_b.");
   return (
     <Dialog open={!!item} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent aria-label="photo-dialog">
         <DialogHeader>
           <DialogTitle>{item.title}</DialogTitle>
           <DialogDescription>
             <img
+              aria-label="higher-res-image"
               srcSet={`
               ${largeImageUrl} 1024w,
               ${item.media.m} 500w

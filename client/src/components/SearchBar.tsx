@@ -73,17 +73,27 @@ export function SearchBar({ onSearchSubmit, isLoading }: Props) {
         <InputGroup>
           <InputGroupInput
             name="search"
+            role="search"
             placeholder="Search..."
             defaultValue={search.q}
             onChange={handleQueryChange}
           />
           <InputGroupAddon>
-            <Button type="submit" size="icon" variant="ghost">
+            <Button
+              type="submit"
+              size="icon"
+              variant="ghost"
+              aria-label="search-icon"
+            >
               {isLoading ? <Spinner className="size-3" /> : <Search />}
             </Button>
           </InputGroupAddon>
           {hasMultipleQueries(search.q) && (
-            <RadioGroup defaultValue="any" onValueChange={handleModeChange}>
+            <RadioGroup
+              aria-label="search-mode"
+              defaultValue="any"
+              onValueChange={handleModeChange}
+            >
               <div className="flex items-center gap-2 mr-3">
                 <RadioGroupItem
                   id="match-all"

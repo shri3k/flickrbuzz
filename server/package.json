@@ -10,6 +10,8 @@
     "start": "node --env-file-if-exists=.env ./index.ts",
     "dev": "node --env-file-if-exists=.env --watch ./index.ts | pnpm exec pino-pretty",
     "lint": "pnpm exec eslint",
+    "test": "node --env-file-if-exists=.env --test",
+    "test:watch": "pn run test --watch",
     "precommit": "pnpm exec prek"
   },
   "devDependencies": {

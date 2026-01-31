@@ -7,26 +7,38 @@ import routes from './routes.ts';
 
 const { PORT = 8080 } = process.env;
 
-const app = Fastify({
-  logger: true,
-}).withTypeProvider<TypeBoxTypeProvider>();
+export function buildApp(opts = {}) {
+  const app = Fastify({
+    ...opts,
+    logger: true,
+  }).withTypeProvider<TypeBoxTypeProvider>();
 
-app.register(routes);
-app.register(cors, {
-  origin: (origin: string | URL, cb) => {
-    const hostname = new URL(origin).hostname;
-    if (hostname === 'localhost') {
-      cb(null, true);
-      return;
+  app.register(routes);
+  app.register(cors, {
+    origin: (origin: string | URL, cb) => {
+      if (!origin) {
+        // allow reqs from other client than browser
+        cb(null, true);
+        return;
+      }
+      const hostname = new URL(origin).hostname;
+      if (hostname === 'localhost') {
+        cb(null, true);
+        return;
+      }
+      cb(new Error('Not allowed'), false);
+    },
+  });
+  return app;
+}
+
+if (import.meta.main) {
+  const app = buildApp();
+  app.listen({ port: PORT as number }, (err, address) => {
+    if (err) {
+      app.log.error(err);
+      process.exit(1);
     }
-    cb(new Error('Not allowed'), false);
-  },
-});
-
-app.listen({ port: PORT as number }, (err, address) => {
-  if (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
-  app.log.info(`Server listening at ${address}`);
-});
+    app.log.info(`Server listening at ${address}`);
+  });
+}

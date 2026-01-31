@@ -16,7 +16,6 @@ export default async function routes(fastify: Fastify) {
   });
   fastify.get('/search', withSchema(Search), async (request, reply) => {
     const { q, mode } = request.query as SearchQuery;
-    console.log('Search query:', q, 'Mode:', mode);
     const data = await flickr.search(q, mode);
     reply.send(data);
   });

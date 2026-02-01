@@ -59,6 +59,10 @@ function PhotoCard({ item, onClick, query }: PhotoCardProps) {
 }
 
 function getTagsFromCurrentURL(query: string): Array<string> {
+  if (!query) {
+    return [];
+  }
+
   return query
     .split(",")
     .map((t) => t.trim())

@@ -1,4 +1,4 @@
-# Buzz Flickr Client
+# FlickrBuzz Client
 
 # Getting Started
 

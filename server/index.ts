@@ -34,7 +34,7 @@ export function buildApp(opts = {}) {
 
 if (import.meta.main) {
   const app = buildApp();
-  app.listen({ port: PORT as number }, (err, address) => {
+  app.listen({ port: PORT as number, host: '0.0.0.0' }, (err, address) => {
     if (err) {
       app.log.error(err);
       process.exit(1);

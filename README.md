@@ -1,0 +1,43 @@
+# Buzz Flickr
+### Run this application:
+
+> [!NOTE]
+> App is served in 3000
+
+- Install docker and docker compose
+- docker compose up from root directory
+
+### Without docker
+- [Install pnpm](https://pnpm.io/installation)
+
+**Install packages**
+```bash
+cd client && pnpm install & \
+cd ../server && pnpm install
+
+```
+
+**Start server**
+```bash
+cd server && pnpm run dev
+```
+**Start client**
+```bash
+cd client && pnpm run dev
+```
+
+### Run tests
+
+#### Unit tests
+```bash
+# client
+cd client && pnpm test
+
+# server
+cd server && pnpm test
+```
+
+### E2E tests
+```bash
+pnpm run e2e
+```

@@ -4,8 +4,13 @@ Uses [fastify](https://fastify.dev/) as http framework with [typebox](https://gi
 
 ## Start application
 
-- Install pnpm
+- [Install pnpm](https://pnpm.io/installation)
 
+**Install packages**
+```bash
+pnpm install
+```
+**Start server**
 ```
 pnpm dev
 ```

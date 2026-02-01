@@ -1,11 +1,12 @@
 # Buzz Flickr
-### Run this application:
+## Run:
 
 > [!NOTE]
 > App is served in 3000
 
+### With docker
 - Install docker and docker compose
-- docker compose up from root directory
+- `docker compose up` from app root directory
 
 ### Without docker
 - [Install pnpm](https://pnpm.io/installation)

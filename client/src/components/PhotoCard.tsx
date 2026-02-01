@@ -32,7 +32,14 @@ function PhotoCard({ item, onClick, query }: PhotoCardProps) {
             </a>
             <div className="flex gap-1 overflow-x-auto ">
               {item.tags.split(" ").map((tag) => {
-                const tags = query.split(",").map((t) => t.trim());
+                const tags = query
+                  .split(",")
+                  .map((t) => t.trim())
+                  .filter((t) => t);
+                console.log("tags", tags);
+                if (tags.length < 1) {
+                  return null;
+                }
                 return (
                   <Badge
                     variant={tags.includes(tag) ? "destructive" : "outline"}

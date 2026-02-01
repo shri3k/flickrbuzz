@@ -16,6 +16,10 @@ export default {
   feed: async () => {
     try {
       const response = await fetch(endpoints.feed());
+      if (!response.ok) {
+        throw new SearchFeedAPIError("API server is down");
+      }
+
       const data = await response.json();
       return data;
     } catch (error) {
@@ -25,6 +29,10 @@ export default {
   search: async (tags: string, mode: Maybe<Mode>) => {
     try {
       const response = await fetch(endpoints.search(tags, mode));
+      if (!response.ok) {
+        throw new SearchFeedAPIError("API server is down");
+      }
+
       const data = await response.json();
       return data;
     } catch (error) {

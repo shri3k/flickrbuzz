@@ -23,7 +23,7 @@ cd ../server && pnpm install
 
 **Install project wide dependencies**
 - `pnpm install` from app root directory
-- `pnpm run prek install #install pre-commit hook`
+- `pnpm run prek:install #install pre-commit hooks`
 
 **Start server**
 ```bash

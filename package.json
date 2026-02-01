@@ -1,5 +1,8 @@
 {
-	"devDependencies": {
-		"@j178/prek": "^0.3.1"
-	}
+  "scripts": {
+    "prek:install": "pnpm exec prek install && pnpm exec prek install --hook-type pre-push"
+  },
+  "devDependencies": {
+    "@j178/prek": "^0.3.1"
+  }
 }

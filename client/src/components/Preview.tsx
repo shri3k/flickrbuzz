@@ -5,7 +5,7 @@ import PhotoDialog from "@/components/PhotoDialog";
 import PhotoCard from "@/components/PhotoCard";
 
 type Props = {
-  feed: [PhotoCardType?];
+  feed: Maybe<Array<PhotoCardType>>;
   query: string;
 };
 
@@ -19,7 +19,7 @@ export function Preview({ query, feed }: Props) {
     setCurrentItem(null);
   };
 
-  if (feed.length < 1) {
+  if (!feed) {
     return null;
   }
 
@@ -32,6 +32,7 @@ export function Preview({ query, feed }: Props) {
         {feed.map((item) => {
           return (
             <PhotoCard
+              key={item.link}
               item={item}
               onClick={handlePhotoEnlargeClick}
               query={query}

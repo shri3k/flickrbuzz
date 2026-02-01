@@ -34,9 +34,10 @@ repos:
         stages: [pre-push]
         pass_filenames: false
 
-      - id: unit-test
-        name: unit-test
-        entry: pnpm test
-        language: system
-        stages: [pre-push]
-        pass_filenames: false
+      # Skip unit test since there is none atm
+      # - id: unit-test
+      #   name: unit-test
+      #   entry: pnpm test
+      #   language: system
+      #   stages: [pre-push]
+      #   pass_filenames: false

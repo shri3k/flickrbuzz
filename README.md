@@ -1,4 +1,4 @@
-# Buzz Flickr
+# FlickrBuzz
 ## Run:
 
 > [!NOTE]

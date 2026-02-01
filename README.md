@@ -17,6 +17,13 @@ cd client && pnpm install & \
 cd ../server && pnpm install
 
 ```
+## Development
+> [!NOTE]
+> Uses pre-commit via [prek](https://prek.j178.dev/)
+
+**Install project wide dependencies**
+- `pnpm install` from app root directory
+- `pnpm run prek install #install pre-commit hook`
 
 **Start server**
 ```bash

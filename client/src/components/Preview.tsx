@@ -1,12 +1,11 @@
 import { useState } from "react";
-import type { FeedData, Maybe } from "@/types.ts";
+import type { Maybe } from "@/types.ts";
 import type { PhotoCard as PhotoCardType } from "./types";
 import PhotoDialog from "@/components/PhotoDialog";
 import PhotoCard from "@/components/PhotoCard";
-import { Skeleton } from "@/components/ui/skeleton";
 
 type Props = {
-  feed: [FeedData];
+  feed: [PhotoCardType?];
   query: string;
 };
 
@@ -19,6 +18,10 @@ export function Preview({ query, feed }: Props) {
   const handlePhotoEnlargeClose = () => {
     setCurrentItem(null);
   };
+
+  if (feed.length < 1) {
+    return null;
+  }
 
   return (
     <>

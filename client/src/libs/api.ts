@@ -14,31 +14,21 @@ const endpoints = {
 
 export default {
   feed: async () => {
-    const response = await fetch(endpoints.feed());
-
-    if (!response.ok) {
-      throw new PublicFeedAPIError("Network response was not ok");
-    }
-
     try {
+      const response = await fetch(endpoints.feed());
       const data = await response.json();
       return data;
     } catch (error) {
-      throw new PublicFeedAPIError("Failed to parse JSON response");
+      throw new PublicFeedAPIError("Failed to fetch public feed right now");
     }
   },
   search: async (tags: string, mode: Maybe<Mode>) => {
-    const response = await fetch(endpoints.search(tags, mode));
-
-    if (!response.ok) {
-      throw new SearchFeedAPIError("Network response was not ok");
-    }
-
     try {
+      const response = await fetch(endpoints.search(tags, mode));
       const data = await response.json();
       return data;
     } catch (error) {
-      throw new SearchFeedAPIError("Failed to parse JSON response");
+      throw new SearchFeedAPIError("Failed to search right now");
     }
   },
 };

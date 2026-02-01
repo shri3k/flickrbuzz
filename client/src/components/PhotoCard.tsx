@@ -12,7 +12,10 @@ type PhotoCardProps = {
 
 function PhotoCard({ item, onClick, query }: PhotoCardProps) {
   return (
-    <Card className="overflow-hidden max-w-md m-3" aria-label="preview-card">
+    <Card
+      className="overflow-hidden max-w-md m-3 shadow-none border-0"
+      aria-label="preview-card"
+    >
       <CardContent className="p-0">
         <AspectRatio ratio={16 / 9}>
           <img
@@ -26,23 +29,22 @@ function PhotoCard({ item, onClick, query }: PhotoCardProps) {
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-2 p-4">
         <div className="flex justify-between w-full items-center">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 overflow-hidden w-full">
             <a href={item.link} target="_blank" rel="noopener noreferrer">
               <h3 className="font-semibold text-lg">{item.title}</h3>
             </a>
-            <div className="flex gap-1 overflow-x-auto ">
+            <div className="flex gap-1 overflow-x-auto max-w-full [&::-webkit-scrollbar]:h-2  hover:[&::-webkit-scrollbar-thumb]:bg-gray-300">
               {item.tags.split(" ").map((tag) => {
-                const tags = query
-                  .split(",")
-                  .map((t) => t.trim())
-                  .filter((t) => t);
-                console.log("tags", tags);
-                if (tags.length < 1) {
+                const queryTags = getTagsFromCurrentURL(query);
+                if (queryTags.length < 1) {
                   return null;
                 }
                 return (
                   <Badge
-                    variant={tags.includes(tag) ? "destructive" : "outline"}
+                    className="flex-shrink-0"
+                    variant={
+                      queryTags.includes(tag) ? "destructive" : "outline"
+                    }
                   >
                     {tag}
                   </Badge>
@@ -54,6 +56,13 @@ function PhotoCard({ item, onClick, query }: PhotoCardProps) {
       </CardFooter>
     </Card>
   );
+}
+
+function getTagsFromCurrentURL(query: string): Array<string> {
+  return query
+    .split(",")
+    .map((t) => t.trim())
+    .filter((t) => t);
 }
 
 export default PhotoCard;

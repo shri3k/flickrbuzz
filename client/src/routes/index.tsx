@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -25,9 +25,12 @@ export const Route = createFileRoute("/")({
 
 function App() {
   const { data, error } = Route.useLoaderData();
+  const search = useSearch({
+    from: "/",
+  });
   const [feed, setFeed] = useState(data);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [currentQuery, setCurrentQuery] = useState<string>("");
+  const [currentQuery, setCurrentQuery] = useState<string>(search.q);
 
   const handleOnSearchSubmit = async (query: string, mode: Maybe<Mode>) => {
     setIsLoading(true);
@@ -85,7 +88,6 @@ async function getFeed(query: string, mode: Maybe<Mode>) {
     return { data: items, error: null };
   } catch (e) {
     let error = "Something went wrong";
-    console.log(e);
     if (e instanceof APIError) {
       error = e.message;
     }

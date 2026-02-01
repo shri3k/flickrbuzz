@@ -6,8 +6,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./client:/app
-    entrypoint: ["pnpm", "run", "dev", "--host"]
+      - "${PWD}/client:/app"
+      - /app/node_modules
 
   server:
     build:
@@ -16,4 +16,5 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./server:/app
+      - "${PWD}/server:/app"
+      - /app/node_modules

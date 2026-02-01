@@ -26,6 +26,7 @@ test('GET / returns 200', async (t) => {
 
     assert.strictEqual(response.statusCode, 200);
   });
+
   await t.test('public feed with > 1 item', async () => {
     const response = await app.inject({
       method: 'GET',

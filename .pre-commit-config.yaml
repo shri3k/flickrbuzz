@@ -6,11 +6,11 @@ repos:
         files: ^client/
         entry: bash -c 'cd client && pnpm run precommit run'
         language: system
-        stages: [pre-commit, pre-push]
+        stages: [pre-push]
 
       - id: run-server-hooks
         name: Server pre-commit
         files: ^server/
         entry: bash -c 'cd server && pnpm run precommit run'
         language: system
-        stages: [pre-commit, pre-push]
+        stages: [pre-push]
